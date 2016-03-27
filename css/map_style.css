@@ -1,3 +1,10 @@
 #map {
       height: 600px;
     }
+
+/* Define mobile styles */
+@media only screen {
+    #map {
+        height: 300px;
+    }
+}
