@@ -91,18 +91,3 @@ function zoom(e) {
 
   //TODO: Figure out how to expand the clickable are so you don't have to hit the trail feature directly to zoom into the area
 }
-
-/**
-Desired behavior through here:
-
-Have trail system organized by region/park (display colors based on that?)
-On click, zoom to area of particular trail system and highlight (make other trails less opaque)
-
-Have ways to highlight portions of the trail network by characteristic (e.g. leash laws)
-
-Sync map to filtering behavior for the
-
-OTHER TODOS:
-Update to use
-
-*/
