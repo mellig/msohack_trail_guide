@@ -12,71 +12,11 @@
 </head>
 <body>
   <div id="map"></div>
-  <button id="button" onclick="zoom()">Click Me!</button>
   <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
   <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
   <script type="text/javascript" src="js/leaflet.ajax.min.js"></script>
-  <script type="text/javascript">
-    // Leaflet documentation: http://leafletjs.com/reference.html
-    // maps.stamen.com library used for basemap
-    // leaflet.ajax used to load external geojson file
+  <script type="text/javascript" src="js/main-map-generator.js"></script>
 
-    // Create Leafley map object, set view to center over Missoula
-
-    var mymap = L.map('map', {
-      center: [46.84,-114.03],
-      zoom: 10,
-      minZoom: 9,
-      maxZoom: 13
-    });
-
-    // Add basemap terrain image, from http://maps.stamen.com/
-    var basemap = new L.StamenTileLayer("terrain");
-    mymap.addLayer(basemap);
-
-
-    // Trailhead marker style
-        // TODO: Figute out how to make this something that can be dynamically changed
-        var geojsonMarkerOptions = {
-            radius: 2,
-            fillColor: "red",
-            color: "#b30000",
-            weight: 0,
-            opacity: 1,
-            fillOpacity: 0.9
-        };
-
-    // Load trail network data
-    var trails = new L.GeoJSON.AJAX("data/msa-trails-all-uncleaned.geojson", {
-        style: function (feature) {
-          return { color: '#e6550d',
-                   weight: 1.0,
-                   opacity: 0.9}
-           }
-      });
-
-    // Load trailheads data
-    var trailheads = new L.GeoJSON.AJAX("data/msa-trailheads.geojson", {
-        pointToLayer: function (feature, latlng) {
-          return L.circleMarker(latlng, geojsonMarkerOptions);
-        }});
-
-    // Add data layers to map
-    trailheads.addTo(mymap);
-    trails.addTo(mymap);
-
-    // function zoom() {
-    //   console.log("ZOOM!");
-    // }
-
-
-    /**
-    Desired behavior through here:
-    Trail system organized by region/park (colored by that)
-    On click, zoom to area of particular trail system and highlight (make other trails less opaque)
-     */
-
-  </script>
 
 </body>
 </html>
