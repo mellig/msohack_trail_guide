@@ -4,11 +4,19 @@ Attempt to use public data on Missoula-area trails to create a simple interactiv
 
 Intent is to adress a percieved gap in currently available online trail information/mapping, most of which seems to be either produced originally for print (and uploaded to the web as pdfs/static images), or produced at a national scale without much locally-focused attention. Mobile usability is also an issue with some existing services.
 
-raw-data folder includes raw .shp files
-data folder includes geojson files for import into mapping via leaflet
-CRS is WGS84/EPSG:4326
+Framework: [Foundation](http://foundation.zurb.com/) 5.
 
-Site designed with Foundation 5.
+## Geodata information
+
+'raw-data' folder includes raw .shp files sourced from public data posted to ESRI servers.
+
+'data' folder includes geojson files for import into mapping via leaflet:
+- msa-trailheads.geojson - point data for some local trailheads (most close in to city)
+- msa-trails-subset.geojson - Small subset of full trails dataset for testing purposes
+- msa-trails-all-uncleaned.geojson - Entire unprocessed version of trail dataset
+- msa-trails-all-cleaned-first-round.geojson - Data with an additional column, trail_network, representing trail network to which individual segements belong
+
+Projection/CRS: WGS84/EPSG:4326
 
 ## TODOs:
 
@@ -28,7 +36,7 @@ Data work:
 
 See if it's possible to get cleaner data (with more information) from the city or other entities directly.
 
-## Other notes:
+## Other Notes:
 
 One interface idea:
 Presenting users with an initial, pre-selected 'Top 5 hikes' upon first reaching the site (e.g. classic local day hikes like the M trail), then let users select other hikes based on the interface.
