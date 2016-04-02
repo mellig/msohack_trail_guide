@@ -11,12 +11,12 @@ Uses Leaflet.js to create an embedded slippy map attached to a #map element.
 // TODO: Figure out how to make this something that can be dynamically changed based on data properties
 // TODO: Figure out how to adjust these based on the overall map zoom level (e.g., making trailhead markers bigger at higher zooms)
 var trailheadMarkerStyle = {
-    radius: 4,
-    fillColor: "#e6550d",
+    radius: 2,
+    fillColor: "#333",
     color: "#fff",
     weight: 1.2,
     opacity: 1,
-    fillOpacity: 1
+    fillOpacity: .8
 };
 
 // Array to store layers for each feature type
@@ -39,12 +39,43 @@ trailMap.addLayer(basemap);
 
 // ADD TRAIL & TRAILHEAD DATA
 
+// Var for trail color area, acting on trail network code
+// TODO: Separate this out into its own file
+var trailColorKey = {
+  'Bitterroot Bike Trail': '#5e4fa2',
+  'Bitterroot Branch Trail': '#5e4fa2',
+  'Blue Mountain': '#ff7f00',
+  'Mt Jumbo': '#6a3d9a',
+  'North Hills': '#ff7f00',
+  'Clark Fork Riverfront': '#a50026',
+  'Mt Sentinel': '#5e4fa2',
+  'South Hills': '#5e4fa2',
+  'Tower Street': '#a50026',
+  'Pattee Canyon': '#ff7f00',
+  'Frenchtown Area': '#a50026',
+  'Rattlesnake': '#a50026',
+  'Lolo National Forest': '#a50026',
+  'Milwaukee Trail': '#5e4fa2',
+  'Mullan Road': '#56036d',
+  'East Missoula': '#c51b7d',
+  'Grant Creek Trail': '#ff7f00'
+}
+console.log(trailColorKey);
+
 // Load trail network data
-var trails = new L.GeoJSON.AJAX("data/msa-trails-all-uncleaned.geojson", {
+var trails = new L.GeoJSON.AJAX("data/msa-trails-cleaned-2nd-round.geojson", {
     style: function (feature) {
-      return { color: '#e6550d',
-               weight: 1.0,
-               opacity: 0.9}
+      styleObj = {weight: 1.5,
+                  opacity: 0.9}
+      var network_name = feature.properties.trail_netw
+      if (trailColorKey.hasOwnProperty(network_name)) {
+        styleObj.color = trailColorKey[network_name];
+        // console.log('Match:', network_name);
+      } else {
+        console.log('No match:', feature.properties.trail_netw);
+          styleObj.color = '#ff7f00';
+      }
+      return styleObj;
   },
   onEachFeature: onEachFeature
 });
